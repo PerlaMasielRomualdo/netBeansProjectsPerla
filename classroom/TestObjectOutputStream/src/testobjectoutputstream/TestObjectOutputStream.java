@@ -6,9 +6,11 @@
 package testobjectoutputstream;
 
 import com.sun.org.apache.xml.internal.security.utils.XMLUtils;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Date;
 import java.util.logging.Level;
@@ -38,6 +40,22 @@ public class TestObjectOutputStream {
             JOptionPane.showMessageDialog(null, "There is of IO" + ex.getMessage());
         } 
         
+        try {
+            ObjectInputStream input = new ObjectInputStream(new FileInputStream("Object.dat"));
+            
+            String name = input.readUTF();
+            Double heigth = input.readDouble();
+            Date date =(Date) input.readObject();
+            
+            System.out.println("Name " + name + " Heigth " + heigth + " Date " + date);
+            input.close();
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "There is an error of FileNotFound" + ex.getMessage());
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "There is of IO" + ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(TestObjectOutputStream.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
