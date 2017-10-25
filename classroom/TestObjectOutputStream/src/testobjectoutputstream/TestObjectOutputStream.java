@@ -40,7 +40,7 @@ public class TestObjectOutputStream {
             JOptionPane.showMessageDialog(null, "There is of IO" + ex.getMessage());
         } 
         
-        try {
+        try {//Se crea un objeto de tipo input para leer el archivo
             ObjectInputStream input = new ObjectInputStream(new FileInputStream("Object.dat"));
             
             String name = input.readUTF();
